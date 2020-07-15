@@ -2,7 +2,7 @@
 // @name         Big screen
 // @namespace    http://tampermonkey.net/
 // @run-at       document-end
-// @version      2.0.0
+// @version      2.0.1
 // @description  screen is now big boy
 // @author       SArpnt
 // @match        https://boxcritters.com/play/
@@ -44,7 +44,6 @@
 
 			let state = ['s', 's']; // first indicates intended state, 2nd indicates actual state
 			function setFull(u = true) {
-				console.log(state, u);
 				if (state[1] == 'f') return;
 				if (u) state[0] = 'f';
 				state[1] = 'f';
