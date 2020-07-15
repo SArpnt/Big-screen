@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Big screen
+// @name         Fullscreen
 // @namespace    http://tampermonkey.net/
 // @run-at       document-end
-// @version      1.0.0
+// @version      2.0.0
 // @description  big boy
 // @author       SArpnt
 // @match        https://boxcritters.com/play/
@@ -25,30 +25,68 @@
 			let canvas = document.getElementById('stage');
 			let worldElem = document.getElementById('world');
 			let chat = document.getElementById('chat');
+			let menu = document.getElementById('menu');
 
-			let isBig = false;
-			function setBig() {
-				isBig = true;
+			let menubar = document.createElement('div');
+			canvas.insertAdjacentElement('afterend', menubar);
+			menubar.id = "menubar";
+			menubar.className = "row justify-content-center m-0";
+			menubar.appendChild(chat.parentElement);
+			menubar.appendChild(menu.parentElement);
+			let styleTag = document.createElement('style')
+			styleTag.innerHTML = `
+				#menubar:hover {animation-name: fadein; opacity:1}
+				#menubar {animation-name: fadeout; animation-duration: .1s; width: 100%; pointer-events: none}
+				#menubar > * {pointer-events: auto}
+				@keyframes fadein {0% {opacity:0.4}}
+				@keyframes fadeout {0% {opacity:1}}
+			`
+			menubar.insertAdjacentElement('afterend', styleTag)
+
+			let state = 'small';
+			function setFull() {
+				state = 'full';
 				worldElem.style.maxWidth = '100%';
 				canvas.parentElement.parentElement.style.width = 'auto';
 				canvas.parentElement.parentElement.style.maxWidth = '100%';
 				canvas.style.width = 'auto';
 				canvas.style.maxWidth = '100%';
+				menubar.style.position = 'absolute';
+				menubar.style.bottom = '0px';
+				menubar.style.opacity = ''
+				update();
+			}
+			function setBig() {
+				state = 'big';
+				worldElem.style.maxWidth = '100%';
+				canvas.parentElement.parentElement.style.width = 'auto';
+				canvas.parentElement.parentElement.style.maxWidth = '100%';
+				canvas.style.width = 'auto';
+				canvas.style.maxWidth = '100%';
+				menubar.style.position = '';
+				menubar.style.bottom = '';
+				menubar.style.opacity = '1'
 				update();
 			}
 			function setSmall() {
-				isBig = false;
+				state = 'small';
 				worldElem.style.maxWidth = '';
 				canvas.parentElement.parentElement.style.width = '';
 				canvas.parentElement.parentElement.style.maxWidth = '';
 				canvas.style.width = '100%';
 				canvas.style.maxWidth = '';
 				canvas.style.height = '';
+				menubar.style.position = '';
+				menubar.style.bottom = '';
+				menubar.style.opacity = '1'
 			}
 
 			function update() {
-				if (isBig) {
-					canvas.style.height = (window.innerHeight - chat.parentElement.offsetHeight) + 'px';
+				if (state != 'small') {
+					if (state = 'full')
+						canvas.style.height = window.innerHeight + 'px';
+					else if (state = 'big')
+						canvas.style.height = (window.innerHeight - menubar.offsetHeight) + 'px';
 					canvas.style.height = Math.round(canvas.offsetWidth / world.stage.width * world.stage.height) + 'px';
 				}
 			}
@@ -57,7 +95,7 @@
 			else
 				window.addEventListener('resize', update);
 
-			setBig();
+			setFull();
 		}, 0);
 	});
 })();
