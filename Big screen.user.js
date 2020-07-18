@@ -2,7 +2,7 @@
 // @name         Big screen
 // @namespace    http://tampermonkey.net/
 // @run-at       document-end
-// @version      2.0.2
+// @version      2.0.3
 // @description  screen is now big boy
 // @author       SArpnt
 // @match        https://boxcritters.com/play/
@@ -20,6 +20,8 @@
 
 (function () {
 	'use strict';
+	cardboard.register('bigScreen');
+
 	cardboard.on('worldStageCreated', function () {
 		let canvas = document.getElementById('stage');
 		let worldElem = document.getElementById('world');
