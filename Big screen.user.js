@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Big screen
 // @namespace    http://tampermonkey.net/
-// @run-at       document-end
+// @run-at       document-start
 // @version      2.0.3
 // @description  screen is now big boy
 // @author       SArpnt
