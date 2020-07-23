@@ -1,17 +1,23 @@
 // ==UserScript==
 // @name         Big screen
-// @namespace    http://tampermonkey.net/
-// @run-at       document-start
-// @version      2.0.3
 // @description  screen is now big boy
 // @author       SArpnt
+// @version      2.1.0
+// @namespace    https://boxcrittersmods.ga/authors/sarpnt/
+// @homepage     https://boxcrittersmods.ga/mods/big-screen/
+// @updateURL    https://github.com/SArpnt/Big-screen/raw/master/Big%20screen.user.js
+// @downloadURL  https://github.com/SArpnt/Big-screen/raw/master/Big%20screen.user.js
+// @supportURL   https://github.com/SArpnt/Big-screen/issues
+// @icon         https://github.com/SArpnt/Big-screen/raw/master/icon16.png
+// @icon64       https://github.com/SArpnt/Big-screen/raw/master/icon64.png
+// @run-at       document-start
+// @grant        none
 // @match        https://boxcritters.com/play/
 // @match        https://boxcritters.com/play/?*
 // @match        https://boxcritters.com/play/#*
 // @match        https://boxcritters.com/play/index.html
 // @match        https://boxcritters.com/play/index.html?*
 // @match        https://boxcritters.com/play/index.html#*
-// @grant        none
 // @require      https://github.com/SArpnt/joinFunction/raw/master/script.js
 // @require      https://github.com/SArpnt/EventHandler/raw/master/script.js
 // @require      https://github.com/SArpnt/cardboard/raw/master/script.user.js
@@ -19,7 +25,7 @@
 
 (function () {
 	'use strict';
-	cardboard.register('bigScreen');
+	let modData = cardboard.register('bigScreen');
 
 	cardboard.on('worldStageCreated', function () {
 		let canvas = document.getElementById('stage');
@@ -107,5 +113,10 @@
 
 			setFull();
 		}, 0);
+		modData.screenState = state;
+		modData.setFull = setFull;
+		modData.setBig = setBig;
+		modData.setSmall = setSmall;
+		modData.update = update;
 	});
 })();
