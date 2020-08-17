@@ -2,7 +2,7 @@
 // @name         Big screen
 // @description  screen is now big boy
 // @author       SArpnt
-// @version      2.1.0
+// @version      2.1.1
 // @namespace    https://boxcrittersmods.ga/authors/sarpnt/
 // @homepage     https://boxcrittersmods.ga/mods/big-screen/
 // @updateURL    https://github.com/SArpnt/Big-screen/raw/master/Big%20screen.user.js
@@ -27,7 +27,7 @@
 	'use strict';
 	let modData = cardboard.register('bigScreen');
 
-	cardboard.on('worldStageCreated', function () {
+	cardboard.on('worldStageCreated', function (world, stage) {
 		let canvas = document.getElementById('stage');
 		let worldElem = document.getElementById('world');
 		let chat = document.getElementById('chat');
@@ -54,11 +54,14 @@
 			state[1] = 'f';
 			worldElem.style.maxWidth = '100%';
 			worldElem.style.padding = '0';
-			canvas.parentElement.parentElement.style.width = 'auto';
-			canvas.parentElement.parentElement.style.maxWidth = '100%';
+			canvas.parentElement.style.width = 'auto';
+			canvas.parentElement.style.maxWidth = '100%';
 			canvas.style.width = 'auto';
 			menubar.style.position = 'absolute';
-			menubar.style.bottom = '0px';
+			menubar.style.bottom = '0';
+			menubar.style.left = '0';
+			menubar.style.right = '0';
+			menubar.style.width = 'auto';
 			menubar.style.opacity = '';
 			if (u) update();
 		}
@@ -68,11 +71,14 @@
 			state[1] = 'b';
 			worldElem.style.maxWidth = '100%';
 			worldElem.style.padding = '0';
-			canvas.parentElement.parentElement.style.width = 'auto';
-			canvas.parentElement.parentElement.style.maxWidth = '100%';
+			canvas.parentElement.style.width = 'auto';
+			canvas.parentElement.style.maxWidth = '100%';
 			canvas.style.width = 'auto';
 			menubar.style.position = '';
 			menubar.style.bottom = '';
+			menubar.style.left = '';
+			menubar.style.right = '';
+			menubar.style.width = '';
 			menubar.style.height = '';
 			menubar.style.opacity = '1';
 			if (u) update();
@@ -83,12 +89,15 @@
 			state[1] = 's';
 			worldElem.style.maxWidth = '';
 			worldElem.style.padding = '';
-			canvas.parentElement.parentElement.style.width = '';
-			canvas.parentElement.parentElement.style.maxWidth = '';
+			canvas.parentElement.style.width = '';
+			canvas.parentElement.style.maxWidth = '';
 			canvas.style.width = '100%';
 			canvas.style.height = '';
 			menubar.style.position = '';
 			menubar.style.bottom = '';
+			menubar.style.left = '';
+			menubar.style.right = '';
+			menubar.style.width = '';
 			menubar.style.height = '';
 			menubar.style.opacity = '1';
 		}
@@ -106,8 +115,8 @@
 			}
 		}
 		setTimeout(function () {
-			if (world.stage.hUpdate)
-				world.stage.hUpdate = joinFunction(world.stage.hUpdate, update, world.stage.hUpdate);
+			if (stage.hUpdate)
+				stage.hUpdate = joinFunction(stage.hUpdate, update, stage.hUpdate);
 			else
 				window.addEventListener('resize', update);
 
