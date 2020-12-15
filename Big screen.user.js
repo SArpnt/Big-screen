@@ -2,7 +2,7 @@
 // @name         Big screen
 // @description  screen is now big boy
 // @author       SArpnt
-// @version      2.2.0
+// @version      2.2.1
 // @namespace    https://boxcrittersmods.ga/authors/sarpnt/
 // @homepage     https://boxcrittersmods.ga/mods/big-screen/
 // @updateURL    https://github.com/SArpnt/Big-screen/raw/master/Big%20screen.user.js
@@ -12,12 +12,7 @@
 // @icon64       https://github.com/SArpnt/Big-screen/raw/master/icon64.png
 // @run-at       document-start
 // @grant        none
-// @match        https://boxcritters.com/play/
-// @match        https://boxcritters.com/play/?*
-// @match        https://boxcritters.com/play/#*
-// @match        https://boxcritters.com/play/index.html
-// @match        https://boxcritters.com/play/index.html?*
-// @match        https://boxcritters.com/play/index.html#*
+// @include      /^https:\/\/boxcritters\.com\/play\/(index\.html)?([\?#].*)?$/
 // @require      https://github.com/SArpnt/joinFunction/raw/master/script.js
 // @require      https://github.com/SArpnt/EventHandler/raw/master/script.js
 // @require      https://github.com/SArpnt/cardboard/raw/master/script.user.js
